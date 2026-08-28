@@ -70,7 +70,7 @@ def execute_job(job: Job) -> Job:
         try:
             assert isinstance(job.payload, CsvPayload)
             path = job.payload.file_path
-            column = job.payload.file_path
+            column = job.payload.column
 
             job.status = JobStatus.COMPLETED
             job.result = path + str(column)  # placeholder work implement csv processing later

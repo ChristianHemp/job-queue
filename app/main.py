@@ -41,7 +41,6 @@ class Job(BaseModel):
     result: Any | None = None
     error: str | None = None
 
-
 jobs: dict[int, Job] = {}
 next_id = 1
 
@@ -101,6 +100,7 @@ def run_job(job_id: int) -> Job:
         raise HTTPException(status_code=409, detail="Job already completed")
 
     execute_job(job)
+    
     return job
     
 

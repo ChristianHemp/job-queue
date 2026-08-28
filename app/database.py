@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+
 DATABASE_URL = "postgresql+psycopg://christian@localhost/job_queue"
 
 engine = create_engine(DATABASE_URL)

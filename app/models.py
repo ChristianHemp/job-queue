@@ -2,6 +2,7 @@ from sqlalchemy import Integer, String
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
 from sqlalchemy.dialects.postgresql import JSONB
 
+
 class Base(DeclarativeBase):
     pass
 

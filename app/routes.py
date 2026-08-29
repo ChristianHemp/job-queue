@@ -51,39 +51,3 @@ def get_all_jobs(db: Session = Depends(get_db)) -> Sequence[JobDB]:
     all_jobs = db.scalars(select(JobDB)).all()
 
     return all_jobs
-
-# archived post endpoint for manually running job
-
-# @router.post("/jobs/{job_id}/run", response_model=Job)
-# def run_job(job_id: int, db: Session = Depends(get_db)) -> JobDB:
-#     job = db.get(JobDB, job_id)
-
-#     if job is None:
-#         raise HTTPException(status_code=404, detail="Job Not Found")
-
-#     if job.status == JobStatus.RUNNING.value:
-#         raise HTTPException(status_code=409, detail="Job already running")
-
-#     if job.status == JobStatus.COMPLETED.value:
-#         raise HTTPException(status_code=409, detail="Job already completed")
-
-
-#     job.status = JobStatus.RUNNING.value
-#     job.result = None
-#     job.error = None
-#     db.commit()
-
-#     try:
-#         payload = parse_job_payload(job)
-#         job_type = JobType(job.job_type)
-#         result = execute_job(job_type, payload)
-#         job.result = result
-#         job.status = JobStatus.COMPLETED.value
-#     except Exception as e:
-#         job.error = str(e)
-#         job.result = None
-#         job.status = JobStatus.FAILED.value
-
-#     db.commit()
-#     db.refresh(job)
-#     return job

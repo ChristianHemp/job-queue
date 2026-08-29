@@ -1,11 +1,18 @@
+import csv
 from typing import Any
+from collections import defaultdict
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.schemas import (JobType, JobStatus, JobPayload, SumNumbersPayload, CsvPayload)
 from app.queue import enqueue
 from app.models import JobDB
 from app.database import SessionLocal
+from app.schemas import (JobType, 
+                         JobStatus, 
+                         JobPayload, 
+                         SumNumbersPayload, 
+                         CsvPayload, 
+                         SalesDataPayload)
 
 
 def _get_job_by_id(db: Session, job_id: int) -> JobDB | None:
@@ -69,6 +76,156 @@ def execute_process_csv(payload: CsvPayload) -> str:
 
     return path + str(column) # placeholder work implement csv processing later
 
+def execute_analyze_sales_data(payload: SalesDataPayload) -> dict[str, Any]:
+    # INCOMPLETE: Implement data cleaning and edge cases ie empty revenue, dirty date ie $15
+    with open(payload.file_path, newline='') as file:
+        reader = csv.DictReader(file)
+
+        if reader.fieldnames is None:
+            raise ValueError("File has no headers")
+
+        column_map = {}
+
+        for header in reader.fieldnames:
+            formatted_header = header.strip().lower().replace(" ", "_")
+
+            for column_type, aliases in COLUMN_ALIASES.items():
+                if formatted_header in aliases:
+                    column_map[column_type] = header
+
+        row_count = 0
+        total_revenue = 0.0
+        total_quantity = 0
+
+        revenue_by_category: defaultdict[str, float] = defaultdict(float)
+        revenue_by_region: defaultdict[str, float] = defaultdict(float)
+        revenue_by_date: defaultdict[str, float] = defaultdict(float)
+        revenue_by_product: defaultdict[str, float] = defaultdict(float)
+        quantity_by_date: defaultdict[str, int] = defaultdict(int)
+
+        for row in reader:
+            row_count += 1
+
+            if "revenue" in column_map:
+                revenue = float(row[column_map["revenue"]])
+                total_revenue += revenue
+
+                if "category" in column_map:
+                    category = row[column_map["category"]]
+                
+                    revenue_by_category[category] += revenue
+                
+                if "region" in column_map:
+                    region = row[column_map["region"]]
+                
+                    revenue_by_region[region] += revenue
+                
+                if "date" in column_map:
+                    date = row[column_map["date"]]
+                
+                    revenue_by_date[date] += revenue
+                
+                if "product" in column_map:
+                    product = row[column_map["product"]]
+                
+                    revenue_by_product[product] += revenue
+
+            if "quantity" in column_map:
+                quantity = int(row[column_map["quantity"]])
+                total_quantity += quantity
+
+                if "date" in column_map:
+                    date = row[column_map["date"]]
+
+                    quantity_by_date[date] += quantity
+
+        result: dict[str, Any] = {"row_count": row_count}
+
+        if "revenue" in column_map:
+            result["total_revenue"] = total_revenue
+
+        if "quantity" in column_map:
+            result["total_quantity"] = total_quantity
+
+        if revenue_by_category:
+            result["revenue_by_category"] = dict(revenue_by_category)
+
+        if revenue_by_region:
+            result["revenue_by_region"] = dict(revenue_by_region)
+
+        if revenue_by_product:
+            result["revenue_by_product"] = dict(revenue_by_product)
+
+        if revenue_by_date:
+            highest_revenue_date = max(
+                revenue_by_date, key=revenue_by_date.__getitem__
+            )
+
+            result["revenue_by_date"] = dict(revenue_by_date)
+
+            result["highest_revenue_date"] = {
+                "date": highest_revenue_date,
+                "revenue": revenue_by_date[highest_revenue_date]
+            }
+
+        if quantity_by_date:
+            highest_volume_date = max(
+                quantity_by_date, key=quantity_by_date.__getitem__
+            )
+
+            result["quantity_by_date"] = dict(quantity_by_date)
+
+            result["highest_volume_date"] = {
+                "date": highest_volume_date,
+                "quantity": quantity_by_date[highest_volume_date]
+            }
+
+        return result
+
+COLUMN_ALIASES = {
+    "revenue": {
+        "revenue",
+        "sales",
+        "total_sales",
+        "net_sales",
+        "amount"
+    },
+    "quantity": {
+        "quantity",
+        "qty",
+        "units",
+        "units_sold",
+        "number_sold"
+    },
+    "category": {
+        "category",
+        "department",
+        "type",
+        "segment",
+        "product_category",
+        "product_type"
+    },
+    "product": {
+        "product",
+        "item",
+        "merchandise",
+        "good"
+    },
+    "date": {
+        "date",
+        "order_date",
+        "sale_date",
+        "transaction_date",
+    },
+    "region": {
+        "region",
+        "country",
+        "territory",
+        "area",
+        "market"
+    }
+}
+
 JOB_REGISTRY = {
     JobType.SUM_NUMBERS: {
         "payload_model": SumNumbersPayload,
@@ -77,6 +234,10 @@ JOB_REGISTRY = {
     JobType.PROCESS_CSV: {
         "payload_model": CsvPayload,
         "executor": execute_process_csv
+    },
+    JobType.ANALYZE_SALES_DATA: {
+        "payload_model": SalesDataPayload,
+        "executor": execute_analyze_sales_data
     }
 }
 

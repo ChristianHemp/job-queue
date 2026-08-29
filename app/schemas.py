@@ -6,6 +6,7 @@ from enum import Enum, IntEnum
 class JobType(str, Enum):
     SUM_NUMBERS = "sum_numbers"
     PROCESS_CSV = "process_csv"
+    ANALYZE_SALES_DATA = "analyze_sales_data"
 
 class JobPriority(IntEnum):
     LOW_PRIORITY = 3
@@ -25,10 +26,13 @@ class CsvPayload(BaseModel):
     file_path: str
     column: int
 
-JobPayload = SumNumbersPayload | CsvPayload
+class SalesDataPayload(BaseModel):
+    file_path: str
+
+JobPayload = SumNumbersPayload | CsvPayload | SalesDataPayload
 
 class JobCreateBase(BaseModel):
-    priority: int = JobPriority.NORMAL_PRIORITY
+    priority: JobPriority = JobPriority.NORMAL_PRIORITY
 
 class SumNumbersJobCreate(JobCreateBase):
     job_type: Literal["sum_numbers"]
@@ -38,8 +42,12 @@ class CsvJobCreate(JobCreateBase):
     job_type: Literal["process_csv"]
     payload: CsvPayload
 
+class SalesAnalysisJobCreate(JobCreateBase):
+    job_type: Literal["analyze_sales_data"]
+    payload: SalesDataPayload
+
 JobCreate = Annotated[
-    SumNumbersJobCreate | CsvJobCreate, Field(discriminator="job_type")
+    (SumNumbersJobCreate | CsvJobCreate | SalesAnalysisJobCreate), Field(discriminator="job_type")
     ]
 
 class Job(BaseModel):

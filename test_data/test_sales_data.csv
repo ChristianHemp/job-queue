@@ -1,0 +1,17 @@
+order_date,product,category,quantity,total_sales,region
+2026-08-01,Laptop Stand,Electronics,4,320.00,West
+2026-08-01,Wireless Mouse,Electronics,10,450.00,West
+2026-08-02,Office Chair,Furniture,6,1500.00,East
+2026-08-02,Standing Desk,Furniture,3,2100.00,East
+2026-08-03,Mechanical Keyboard,Electronics,12,1080.00,South
+2026-08-03,USB-C Hub,Electronics,15,900.00,South
+2026-08-04,Desk Lamp,Furniture,8,480.00,West
+2026-08-04,Monitor Arm,Electronics,5,625.00,West
+2026-08-05,Notebook Pack,Office Supplies,30,300.00,North
+2026-08-05,Printer Paper,Office Supplies,25,250.00,North
+2026-08-06,27-inch Monitor,Electronics,7,2100.00,East
+2026-08-06,Webcam,Electronics,9,720.00,East
+2026-08-07,Ergonomic Keyboard,Electronics,11,1210.00,South
+2026-08-07,Filing Cabinet,Furniture,4,800.00,South
+2026-08-08,Desk Organizer,Office Supplies,20,400.00,West
+2026-08-08,Standing Desk,Furniture,5,3500.00,West

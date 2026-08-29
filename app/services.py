@@ -1,8 +1,11 @@
 from typing import Any
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.schemas import (JobType, JobStatus, JobPayload, SumNumbersPayload, CsvPayload)
+from app.job_queue import enqueue
 from app.models import JobDB
+from app.database import SessionLocal
 
 
 def _get_job_by_id(db: Session, job_id: int) -> JobDB | None:
@@ -40,7 +43,7 @@ def process_job(db: Session, job_id: int) -> None:
         job_type = JobType(job.job_type)
         payload = _parse_job_payload(job)
         result = execute_job(job_type, payload)
-        
+
         job.result = result
         _mark_job_completed(db, job)
     except Exception as e:
@@ -87,3 +90,14 @@ def _parse_job_payload(job: JobDB) -> JobPayload:
     payload = payload_model.model_validate(job.payload)
 
     return payload
+
+def restore_pending_jobs() -> None:
+    with SessionLocal() as db:
+        pending_jobs = db.scalars(
+            select(JobDB).where(
+                JobDB.status == JobStatus.PENDING.value
+                ).order_by(JobDB.job_id)
+            ).all()
+
+        for job in pending_jobs:
+            enqueue(job.job_id, job.priority)

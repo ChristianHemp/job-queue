@@ -1,11 +1,16 @@
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Literal, Annotated, Any
-from enum import Enum
+from enum import Enum, IntEnum
 
 
 class JobType(str, Enum):
     SUM_NUMBERS = "sum_numbers"
     PROCESS_CSV = "process_csv"
+
+class JobPriority(IntEnum):
+    LOW_PRIORITY = 3
+    NORMAL_PRIORITY = 2
+    HIGH_PRIORITY = 1
 
 class JobStatus(str, Enum):
     PENDING = "pending"
@@ -22,11 +27,14 @@ class CsvPayload(BaseModel):
 
 JobPayload = SumNumbersPayload | CsvPayload
 
-class SumNumbersJobCreate(BaseModel):
+class JobCreateBase(BaseModel):
+    priority: int = JobPriority.NORMAL_PRIORITY
+
+class SumNumbersJobCreate(JobCreateBase):
     job_type: Literal["sum_numbers"]
     payload: SumNumbersPayload
 
-class CsvJobCreate(BaseModel):
+class CsvJobCreate(JobCreateBase):
     job_type: Literal["process_csv"]
     payload: CsvPayload
 
@@ -40,6 +48,7 @@ class Job(BaseModel):
     job_id: int
     job_type: JobType
     payload: JobPayload
+    priority: JobPriority
     status: JobStatus
     result: Any | None = None
     error: str | None = None

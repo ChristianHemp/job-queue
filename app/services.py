@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.schemas import (JobType, JobStatus, JobPayload, SumNumbersPayload, CsvPayload)
-from app.job_queue import enqueue
+from app.queue import enqueue
 from app.models import JobDB
 from app.database import SessionLocal
 

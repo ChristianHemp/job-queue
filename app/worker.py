@@ -1,5 +1,5 @@
 from app.database import SessionLocal
-from app.job_queue import dequeue
+from app.queue import dequeue
 from app.services import process_job
 
 

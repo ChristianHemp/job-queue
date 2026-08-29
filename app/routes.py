@@ -5,7 +5,7 @@ from sqlalchemy import select
 
 from app.database import get_db
 from app.models import JobDB
-from app.job_queue import enqueue
+from app.queue import enqueue
 from app.schemas import (
     JobType, 
     JobPriority,

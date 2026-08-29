@@ -1,0 +1,601 @@
+order_date,product,category,quantity,total_sales,region
+2026-08-01,Whiteboard,Office Supplies,12,900.00,West
+2026-08-01,Desk Mat,Office Supplies,22,550.00,East
+2026-08-01,Monitor Arm,Electronics,6,750.00,West
+2026-08-01,Pen Set,Office Supplies,39,468.00,West
+2026-08-01,Foot Rest,Furniture,7,315.00,West
+2026-08-01,Laptop Stand,Electronics,4,320.00,East
+2026-08-02,Monitor Arm,Electronics,18,2250.00,West
+2026-08-02,Surge Protector,Electronics,8,280.00,North
+2026-08-02,Monitor Arm,Electronics,16,2000.00,South
+2026-08-02,Laptop Sleeve,Electronics,2,80.00,East
+2026-08-02,Sticky Notes,Office Supplies,32,256.00,South
+2026-08-02,Notebook Pack,Office Supplies,14,140.00,East
+2026-08-03,External SSD,Electronics,12,1680.00,West
+2026-08-03,Office Chair,Furniture,7,1750.00,West
+2026-08-03,Webcam,Electronics,13,1040.00,South
+2026-08-03,Laptop Sleeve,Electronics,3,120.00,North
+2026-08-03,Surge Protector,Electronics,5,175.00,North
+2026-08-03,Office Chair,Furniture,9,2250.00,South
+2026-08-04,Conference Chair,Furniture,10,1750.00,South
+2026-08-04,Foot Rest,Furniture,4,180.00,West
+2026-08-04,Wireless Mouse,Electronics,9,405.00,South
+2026-08-04,Office Chair,Furniture,4,1000.00,West
+2026-08-04,Ergonomic Keyboard,Electronics,10,1100.00,North
+2026-08-04,Whiteboard,Office Supplies,28,2100.00,East
+2026-08-05,Webcam,Electronics,13,1040.00,East
+2026-08-05,Pen Set,Office Supplies,22,264.00,West
+2026-08-05,Bookshelf,Furniture,3,540.00,East
+2026-08-05,USB-C Hub,Electronics,16,960.00,North
+2026-08-05,Notebook Pack,Office Supplies,40,400.00,East
+2026-08-05,Pen Set,Office Supplies,25,300.00,West
+2026-08-06,Monitor Arm,Electronics,3,375.00,South
+2026-08-06,Ergonomic Keyboard,Electronics,10,1100.00,West
+2026-08-06,Desk Lamp,Furniture,10,600.00,South
+2026-08-06,Desk Lamp,Furniture,8,480.00,North
+2026-08-06,Whiteboard,Office Supplies,34,2550.00,East
+2026-08-06,Notebook Pack,Office Supplies,13,130.00,East
+2026-08-07,Desk Mat,Office Supplies,40,1000.00,South
+2026-08-07,Desk Mat,Office Supplies,32,800.00,North
+2026-08-07,Webcam,Electronics,9,720.00,East
+2026-08-07,Bluetooth Headset,Electronics,17,1615.00,West
+2026-08-07,External SSD,Electronics,3,420.00,West
+2026-08-07,Mechanical Keyboard,Electronics,7,630.00,North
+2026-08-08,Bookshelf,Furniture,2,360.00,North
+2026-08-08,Ergonomic Keyboard,Electronics,16,1760.00,South
+2026-08-08,Surge Protector,Electronics,2,70.00,West
+2026-08-08,Pen Set,Office Supplies,39,468.00,South
+2026-08-08,External SSD,Electronics,12,1680.00,West
+2026-08-08,Printer Paper,Office Supplies,32,320.00,East
+2026-08-09,Desk Organizer,Office Supplies,5,100.00,South
+2026-08-09,Bluetooth Headset,Electronics,7,665.00,West
+2026-08-09,Drawer Unit,Furniture,5,750.00,East
+2026-08-09,Mechanical Keyboard,Electronics,13,1170.00,East
+2026-08-09,Surge Protector,Electronics,18,630.00,West
+2026-08-09,Bookshelf,Furniture,6,1080.00,North
+2026-08-10,Laptop Stand,Electronics,5,400.00,South
+2026-08-10,Conference Chair,Furniture,5,875.00,East
+2026-08-10,Wireless Mouse,Electronics,9,405.00,West
+2026-08-10,Office Chair,Furniture,8,2000.00,West
+2026-08-10,External SSD,Electronics,6,840.00,East
+2026-08-10,Pen Set,Office Supplies,35,420.00,East
+2026-08-11,Notebook Pack,Office Supplies,38,380.00,North
+2026-08-11,Desk Lamp,Furniture,9,540.00,East
+2026-08-11,Sticky Notes,Office Supplies,24,192.00,North
+2026-08-11,Pen Set,Office Supplies,28,336.00,North
+2026-08-11,Bluetooth Headset,Electronics,16,1520.00,West
+2026-08-11,Monitor Arm,Electronics,9,1125.00,West
+2026-08-12,27-inch Monitor,Electronics,2,600.00,East
+2026-08-12,Foot Rest,Furniture,4,180.00,West
+2026-08-12,Office Chair,Furniture,1,250.00,East
+2026-08-12,Office Chair,Furniture,1,250.00,South
+2026-08-12,Office Chair,Furniture,9,2250.00,East
+2026-08-12,Notebook Pack,Office Supplies,36,360.00,East
+2026-08-13,Surge Protector,Electronics,6,210.00,North
+2026-08-13,Monitor Arm,Electronics,17,2125.00,North
+2026-08-13,Desk Lamp,Furniture,2,120.00,West
+2026-08-13,Pen Set,Office Supplies,32,384.00,South
+2026-08-13,Filing Cabinet,Furniture,7,1400.00,North
+2026-08-13,Drawer Unit,Furniture,1,150.00,West
+2026-08-14,Wireless Mouse,Electronics,14,630.00,South
+2026-08-14,Laptop Sleeve,Electronics,5,200.00,East
+2026-08-14,Desk Lamp,Furniture,4,240.00,North
+2026-08-14,Mechanical Keyboard,Electronics,15,1350.00,East
+2026-08-14,Notebook Pack,Office Supplies,34,340.00,East
+2026-08-14,Drawer Unit,Furniture,2,300.00,North
+2026-08-15,Laptop Sleeve,Electronics,5,200.00,West
+2026-08-15,Whiteboard,Office Supplies,39,2925.00,West
+2026-08-15,Office Chair,Furniture,4,1000.00,East
+2026-08-15,Filing Cabinet,Furniture,8,1600.00,North
+2026-08-15,Desk Lamp,Furniture,7,420.00,West
+2026-08-15,USB-C Hub,Electronics,14,840.00,West
+2026-08-16,Ergonomic Keyboard,Electronics,10,1100.00,North
+2026-08-16,Printer Paper,Office Supplies,32,320.00,North
+2026-08-16,Mechanical Keyboard,Electronics,8,720.00,South
+2026-08-16,Desk Lamp,Furniture,1,60.00,West
+2026-08-16,Desk Mat,Office Supplies,25,625.00,West
+2026-08-16,Wireless Mouse,Electronics,17,765.00,East
+2026-08-17,Wireless Mouse,Electronics,18,810.00,West
+2026-08-17,Drawer Unit,Furniture,3,450.00,West
+2026-08-17,Bookshelf,Furniture,2,360.00,East
+2026-08-17,Ergonomic Keyboard,Electronics,5,550.00,East
+2026-08-17,Foot Rest,Furniture,10,450.00,West
+2026-08-17,Bookshelf,Furniture,2,360.00,North
+2026-08-18,Pen Set,Office Supplies,38,456.00,South
+2026-08-18,Notebook Pack,Office Supplies,18,180.00,South
+2026-08-18,Monitor Arm,Electronics,10,1250.00,North
+2026-08-18,Mechanical Keyboard,Electronics,11,990.00,North
+2026-08-18,27-inch Monitor,Electronics,4,1200.00,West
+2026-08-18,Desk Organizer,Office Supplies,11,220.00,West
+2026-08-19,Surge Protector,Electronics,8,280.00,South
+2026-08-19,Mechanical Keyboard,Electronics,13,1170.00,West
+2026-08-19,Monitor Arm,Electronics,13,1625.00,South
+2026-08-19,USB-C Hub,Electronics,16,960.00,South
+2026-08-19,Bookshelf,Furniture,9,1620.00,West
+2026-08-19,Pen Set,Office Supplies,40,480.00,South
+2026-08-20,Pen Set,Office Supplies,11,132.00,East
+2026-08-20,Notebook Pack,Office Supplies,12,120.00,West
+2026-08-20,Desk Mat,Office Supplies,40,1000.00,East
+2026-08-20,Notebook Pack,Office Supplies,23,230.00,East
+2026-08-20,Sticky Notes,Office Supplies,26,208.00,East
+2026-08-20,Pen Set,Office Supplies,21,252.00,North
+2026-08-21,Notebook Pack,Office Supplies,8,80.00,West
+2026-08-21,Whiteboard,Office Supplies,32,2400.00,South
+2026-08-21,Wireless Mouse,Electronics,2,90.00,South
+2026-08-21,External SSD,Electronics,6,840.00,South
+2026-08-21,USB-C Hub,Electronics,16,960.00,North
+2026-08-21,Surge Protector,Electronics,2,70.00,West
+2026-08-22,Office Chair,Furniture,3,750.00,West
+2026-08-22,Conference Chair,Furniture,6,1050.00,East
+2026-08-22,Filing Cabinet,Furniture,3,600.00,West
+2026-08-22,Printer Paper,Office Supplies,28,280.00,West
+2026-08-22,Webcam,Electronics,8,640.00,East
+2026-08-22,Pen Set,Office Supplies,11,132.00,South
+2026-08-23,External SSD,Electronics,15,2100.00,East
+2026-08-23,Monitor Arm,Electronics,7,875.00,East
+2026-08-23,Filing Cabinet,Furniture,1,200.00,East
+2026-08-23,Desk Mat,Office Supplies,26,650.00,North
+2026-08-23,Laptop Sleeve,Electronics,9,360.00,South
+2026-08-23,USB-C Hub,Electronics,5,300.00,North
+2026-08-24,Drawer Unit,Furniture,1,150.00,North
+2026-08-24,Monitor Arm,Electronics,8,1000.00,North
+2026-08-24,Webcam,Electronics,11,880.00,East
+2026-08-24,Monitor Arm,Electronics,2,250.00,East
+2026-08-24,Ergonomic Keyboard,Electronics,12,1320.00,South
+2026-08-24,Drawer Unit,Furniture,2,300.00,South
+2026-08-25,Webcam,Electronics,18,1440.00,North
+2026-08-25,Pen Set,Office Supplies,39,468.00,South
+2026-08-25,Laptop Stand,Electronics,5,400.00,South
+2026-08-25,USB-C Hub,Electronics,10,600.00,West
+2026-08-25,Standing Desk,Furniture,10,7000.00,North
+2026-08-25,Webcam,Electronics,12,960.00,North
+2026-08-26,Bookshelf,Furniture,9,1620.00,West
+2026-08-26,Ergonomic Keyboard,Electronics,8,880.00,South
+2026-08-26,Wireless Mouse,Electronics,15,675.00,West
+2026-08-26,Bluetooth Headset,Electronics,8,760.00,South
+2026-08-26,Filing Cabinet,Furniture,2,400.00,South
+2026-08-26,Bookshelf,Furniture,6,1080.00,West
+2026-08-27,Desk Mat,Office Supplies,24,600.00,South
+2026-08-27,Pen Set,Office Supplies,31,372.00,South
+2026-08-27,Ergonomic Keyboard,Electronics,11,1210.00,East
+2026-08-27,Desk Lamp,Furniture,7,420.00,North
+2026-08-27,Pen Set,Office Supplies,16,192.00,South
+2026-08-27,Ergonomic Keyboard,Electronics,2,220.00,South
+2026-08-28,Printer Paper,Office Supplies,18,180.00,North
+2026-08-28,Laptop Sleeve,Electronics,12,480.00,North
+2026-08-28,Desk Organizer,Office Supplies,33,660.00,East
+2026-08-28,Bluetooth Headset,Electronics,17,1615.00,East
+2026-08-28,Pen Set,Office Supplies,10,120.00,South
+2026-08-28,Bluetooth Headset,Electronics,12,1140.00,West
+2026-08-29,Conference Chair,Furniture,4,700.00,South
+2026-08-29,Monitor Arm,Electronics,8,1000.00,East
+2026-08-29,Laptop Stand,Electronics,3,240.00,East
+2026-08-29,Laptop Dock,Electronics,4,720.00,North
+2026-08-29,Filing Cabinet,Furniture,10,2000.00,East
+2026-08-29,Sticky Notes,Office Supplies,29,232.00,North
+2026-08-30,Ergonomic Keyboard,Electronics,9,990.00,East
+2026-08-30,Whiteboard,Office Supplies,5,375.00,West
+2026-08-30,External SSD,Electronics,15,2100.00,East
+2026-08-30,USB-C Hub,Electronics,18,1080.00,North
+2026-08-30,Wireless Mouse,Electronics,9,405.00,West
+2026-08-30,Desk Organizer,Office Supplies,13,260.00,North
+2026-08-31,Pen Set,Office Supplies,38,456.00,South
+2026-08-31,External SSD,Electronics,16,2240.00,North
+2026-08-31,Conference Chair,Furniture,9,1575.00,North
+2026-08-31,USB-C Hub,Electronics,17,1020.00,North
+2026-08-31,Notebook Pack,Office Supplies,20,200.00,South
+2026-08-31,External SSD,Electronics,18,2520.00,North
+2026-09-01,Whiteboard,Office Supplies,20,1500.00,South
+2026-09-01,Desk Organizer,Office Supplies,9,180.00,South
+2026-09-01,Monitor Arm,Electronics,10,1250.00,South
+2026-09-01,27-inch Monitor,Electronics,4,1200.00,East
+2026-09-01,Mechanical Keyboard,Electronics,9,810.00,North
+2026-09-01,Sticky Notes,Office Supplies,14,112.00,East
+2026-09-02,Office Chair,Furniture,7,1750.00,North
+2026-09-02,27-inch Monitor,Electronics,16,4800.00,North
+2026-09-02,Wireless Mouse,Electronics,8,360.00,North
+2026-09-02,Ergonomic Keyboard,Electronics,2,220.00,North
+2026-09-02,Laptop Dock,Electronics,2,360.00,South
+2026-09-02,Printer Paper,Office Supplies,29,290.00,North
+2026-09-03,Surge Protector,Electronics,9,315.00,North
+2026-09-03,Monitor Arm,Electronics,10,1250.00,North
+2026-09-03,Laptop Dock,Electronics,2,360.00,North
+2026-09-03,27-inch Monitor,Electronics,14,4200.00,East
+2026-09-03,Conference Chair,Furniture,8,1400.00,East
+2026-09-03,Bookshelf,Furniture,9,1620.00,West
+2026-09-04,Ergonomic Keyboard,Electronics,2,220.00,West
+2026-09-04,Whiteboard,Office Supplies,32,2400.00,East
+2026-09-04,Drawer Unit,Furniture,8,1200.00,East
+2026-09-04,Wireless Mouse,Electronics,10,450.00,North
+2026-09-04,27-inch Monitor,Electronics,8,2400.00,North
+2026-09-04,27-inch Monitor,Electronics,12,3600.00,North
+2026-09-05,Notebook Pack,Office Supplies,31,310.00,South
+2026-09-05,Conference Chair,Furniture,2,350.00,North
+2026-09-05,Laptop Stand,Electronics,3,240.00,South
+2026-09-05,Monitor Arm,Electronics,4,500.00,West
+2026-09-05,External SSD,Electronics,2,280.00,East
+2026-09-05,Desk Lamp,Furniture,1,60.00,East
+2026-09-06,Monitor Arm,Electronics,6,750.00,North
+2026-09-06,Pen Set,Office Supplies,12,144.00,East
+2026-09-06,Desk Organizer,Office Supplies,21,420.00,South
+2026-09-06,USB-C Hub,Electronics,5,300.00,East
+2026-09-06,Printer Paper,Office Supplies,11,110.00,West
+2026-09-06,Printer Paper,Office Supplies,29,290.00,North
+2026-09-07,Sticky Notes,Office Supplies,17,136.00,West
+2026-09-07,Foot Rest,Furniture,4,180.00,West
+2026-09-07,Sticky Notes,Office Supplies,24,192.00,West
+2026-09-07,Laptop Sleeve,Electronics,3,120.00,South
+2026-09-07,Surge Protector,Electronics,15,525.00,South
+2026-09-07,Office Chair,Furniture,9,2250.00,South
+2026-09-08,Laptop Stand,Electronics,15,1200.00,North
+2026-09-08,Standing Desk,Furniture,7,4900.00,South
+2026-09-08,Whiteboard,Office Supplies,34,2550.00,East
+2026-09-08,Filing Cabinet,Furniture,3,600.00,South
+2026-09-08,Bookshelf,Furniture,9,1620.00,North
+2026-09-08,Desk Organizer,Office Supplies,32,640.00,South
+2026-09-09,27-inch Monitor,Electronics,9,2700.00,West
+2026-09-09,Notebook Pack,Office Supplies,33,330.00,East
+2026-09-09,External SSD,Electronics,16,2240.00,North
+2026-09-09,27-inch Monitor,Electronics,2,600.00,North
+2026-09-09,Drawer Unit,Furniture,6,900.00,East
+2026-09-09,Laptop Dock,Electronics,8,1440.00,South
+2026-09-10,Laptop Sleeve,Electronics,10,400.00,South
+2026-09-10,Notebook Pack,Office Supplies,22,220.00,West
+2026-09-10,Bluetooth Headset,Electronics,8,760.00,West
+2026-09-10,Monitor Arm,Electronics,15,1875.00,North
+2026-09-10,Surge Protector,Electronics,9,315.00,North
+2026-09-10,Whiteboard,Office Supplies,36,2700.00,North
+2026-09-11,Laptop Sleeve,Electronics,2,80.00,West
+2026-09-11,Printer Paper,Office Supplies,19,190.00,North
+2026-09-11,Sticky Notes,Office Supplies,20,160.00,South
+2026-09-11,Pen Set,Office Supplies,28,336.00,North
+2026-09-11,Surge Protector,Electronics,18,630.00,South
+2026-09-11,Filing Cabinet,Furniture,9,1800.00,South
+2026-09-12,Webcam,Electronics,16,1280.00,South
+2026-09-12,Printer Paper,Office Supplies,21,210.00,East
+2026-09-12,Standing Desk,Furniture,4,2800.00,South
+2026-09-12,Standing Desk,Furniture,9,6300.00,East
+2026-09-12,Desk Lamp,Furniture,4,240.00,North
+2026-09-12,Notebook Pack,Office Supplies,38,380.00,South
+2026-09-13,Standing Desk,Furniture,4,2800.00,South
+2026-09-13,Monitor Arm,Electronics,13,1625.00,East
+2026-09-13,Printer Paper,Office Supplies,5,50.00,East
+2026-09-13,Notebook Pack,Office Supplies,7,70.00,West
+2026-09-13,Surge Protector,Electronics,11,385.00,East
+2026-09-13,Whiteboard,Office Supplies,36,2700.00,West
+2026-09-14,Drawer Unit,Furniture,1,150.00,South
+2026-09-14,Laptop Dock,Electronics,17,3060.00,North
+2026-09-14,27-inch Monitor,Electronics,7,2100.00,West
+2026-09-14,Notebook Pack,Office Supplies,35,350.00,West
+2026-09-14,Conference Chair,Furniture,2,350.00,North
+2026-09-14,Laptop Dock,Electronics,4,720.00,West
+2026-09-15,Mechanical Keyboard,Electronics,6,540.00,South
+2026-09-15,Office Chair,Furniture,4,1000.00,West
+2026-09-15,Surge Protector,Electronics,15,525.00,East
+2026-09-15,External SSD,Electronics,18,2520.00,North
+2026-09-15,Desk Organizer,Office Supplies,33,660.00,South
+2026-09-15,Drawer Unit,Furniture,10,1500.00,North
+2026-09-16,Printer Paper,Office Supplies,8,80.00,West
+2026-09-16,External SSD,Electronics,8,1120.00,East
+2026-09-16,Notebook Pack,Office Supplies,10,100.00,East
+2026-09-16,Monitor Arm,Electronics,7,875.00,West
+2026-09-16,USB-C Hub,Electronics,2,120.00,North
+2026-09-16,Desk Organizer,Office Supplies,35,700.00,South
+2026-09-17,Wireless Mouse,Electronics,9,405.00,South
+2026-09-17,Sticky Notes,Office Supplies,23,184.00,North
+2026-09-17,Office Chair,Furniture,4,1000.00,South
+2026-09-17,Laptop Sleeve,Electronics,8,320.00,North
+2026-09-17,Standing Desk,Furniture,9,6300.00,East
+2026-09-17,Whiteboard,Office Supplies,14,1050.00,South
+2026-09-18,Conference Chair,Furniture,3,525.00,West
+2026-09-18,Wireless Mouse,Electronics,7,315.00,South
+2026-09-18,Bookshelf,Furniture,10,1800.00,South
+2026-09-18,Desk Organizer,Office Supplies,12,240.00,North
+2026-09-18,Sticky Notes,Office Supplies,24,192.00,North
+2026-09-18,Notebook Pack,Office Supplies,37,370.00,North
+2026-09-19,Desk Organizer,Office Supplies,10,200.00,West
+2026-09-19,Filing Cabinet,Furniture,6,1200.00,South
+2026-09-19,Laptop Stand,Electronics,4,320.00,East
+2026-09-19,Pen Set,Office Supplies,6,72.00,South
+2026-09-19,Foot Rest,Furniture,1,45.00,East
+2026-09-19,Laptop Dock,Electronics,18,3240.00,North
+2026-09-20,Notebook Pack,Office Supplies,16,160.00,North
+2026-09-20,Whiteboard,Office Supplies,36,2700.00,West
+2026-09-20,Laptop Dock,Electronics,13,2340.00,North
+2026-09-20,27-inch Monitor,Electronics,12,3600.00,West
+2026-09-20,Drawer Unit,Furniture,3,450.00,South
+2026-09-20,Filing Cabinet,Furniture,8,1600.00,South
+2026-09-21,Pen Set,Office Supplies,30,360.00,West
+2026-09-21,Desk Organizer,Office Supplies,10,200.00,South
+2026-09-21,Notebook Pack,Office Supplies,25,250.00,West
+2026-09-21,External SSD,Electronics,14,1960.00,West
+2026-09-21,Pen Set,Office Supplies,39,468.00,North
+2026-09-21,Filing Cabinet,Furniture,1,200.00,East
+2026-09-22,Bluetooth Headset,Electronics,13,1235.00,North
+2026-09-22,Whiteboard,Office Supplies,33,2475.00,West
+2026-09-22,Desk Lamp,Furniture,5,300.00,East
+2026-09-22,Printer Paper,Office Supplies,33,330.00,North
+2026-09-22,Standing Desk,Furniture,1,700.00,East
+2026-09-22,Sticky Notes,Office Supplies,15,120.00,South
+2026-09-23,Surge Protector,Electronics,2,70.00,North
+2026-09-23,Office Chair,Furniture,4,1000.00,West
+2026-09-23,Desk Organizer,Office Supplies,12,240.00,East
+2026-09-23,Laptop Dock,Electronics,11,1980.00,South
+2026-09-23,Filing Cabinet,Furniture,8,1600.00,North
+2026-09-23,Monitor Arm,Electronics,16,2000.00,East
+2026-09-24,Ergonomic Keyboard,Electronics,8,880.00,East
+2026-09-24,Drawer Unit,Furniture,2,300.00,South
+2026-09-24,External SSD,Electronics,15,2100.00,South
+2026-09-24,Laptop Sleeve,Electronics,18,720.00,South
+2026-09-24,Conference Chair,Furniture,1,175.00,South
+2026-09-24,Desk Mat,Office Supplies,24,600.00,North
+2026-09-25,Drawer Unit,Furniture,3,450.00,North
+2026-09-25,Surge Protector,Electronics,17,595.00,South
+2026-09-25,27-inch Monitor,Electronics,14,4200.00,North
+2026-09-25,27-inch Monitor,Electronics,8,2400.00,East
+2026-09-25,Foot Rest,Furniture,7,315.00,East
+2026-09-25,Drawer Unit,Furniture,7,1050.00,West
+2026-09-26,27-inch Monitor,Electronics,17,5100.00,North
+2026-09-26,Ergonomic Keyboard,Electronics,6,660.00,North
+2026-09-26,Wireless Mouse,Electronics,6,270.00,South
+2026-09-26,Drawer Unit,Furniture,2,300.00,North
+2026-09-26,Standing Desk,Furniture,9,6300.00,North
+2026-09-26,Laptop Stand,Electronics,6,480.00,North
+2026-09-27,Drawer Unit,Furniture,3,450.00,West
+2026-09-27,Laptop Dock,Electronics,10,1800.00,South
+2026-09-27,Bookshelf,Furniture,7,1260.00,West
+2026-09-27,Drawer Unit,Furniture,6,900.00,North
+2026-09-27,27-inch Monitor,Electronics,17,5100.00,West
+2026-09-27,Bookshelf,Furniture,2,360.00,East
+2026-09-28,Whiteboard,Office Supplies,23,1725.00,East
+2026-09-28,Desk Mat,Office Supplies,10,250.00,North
+2026-09-28,Standing Desk,Furniture,2,1400.00,North
+2026-09-28,USB-C Hub,Electronics,11,660.00,West
+2026-09-28,Wireless Mouse,Electronics,12,540.00,West
+2026-09-28,Printer Paper,Office Supplies,27,270.00,South
+2026-09-29,Filing Cabinet,Furniture,3,600.00,East
+2026-09-29,Bluetooth Headset,Electronics,15,1425.00,East
+2026-09-29,USB-C Hub,Electronics,7,420.00,West
+2026-09-29,Bookshelf,Furniture,7,1260.00,East
+2026-09-29,Laptop Dock,Electronics,6,1080.00,East
+2026-09-29,Desk Organizer,Office Supplies,21,420.00,North
+2026-09-30,Notebook Pack,Office Supplies,5,50.00,North
+2026-09-30,Printer Paper,Office Supplies,39,390.00,East
+2026-09-30,Office Chair,Furniture,8,2000.00,South
+2026-09-30,Foot Rest,Furniture,5,225.00,North
+2026-09-30,Sticky Notes,Office Supplies,21,168.00,North
+2026-09-30,Drawer Unit,Furniture,5,750.00,East
+2026-10-01,Ergonomic Keyboard,Electronics,17,1870.00,West
+2026-10-01,Monitor Arm,Electronics,14,1750.00,South
+2026-10-01,Foot Rest,Furniture,5,225.00,South
+2026-10-01,Laptop Stand,Electronics,14,1120.00,South
+2026-10-01,Laptop Stand,Electronics,3,240.00,North
+2026-10-01,Conference Chair,Furniture,5,875.00,East
+2026-10-02,Bookshelf,Furniture,6,1080.00,East
+2026-10-02,Whiteboard,Office Supplies,17,1275.00,South
+2026-10-02,Pen Set,Office Supplies,13,156.00,West
+2026-10-02,Whiteboard,Office Supplies,7,525.00,South
+2026-10-02,Laptop Sleeve,Electronics,16,640.00,West
+2026-10-02,Foot Rest,Furniture,6,270.00,East
+2026-10-03,Office Chair,Furniture,5,1250.00,South
+2026-10-03,Desk Mat,Office Supplies,31,775.00,East
+2026-10-03,Desk Lamp,Furniture,3,180.00,South
+2026-10-03,Bluetooth Headset,Electronics,18,1710.00,South
+2026-10-03,Conference Chair,Furniture,3,525.00,South
+2026-10-03,Conference Chair,Furniture,8,1400.00,South
+2026-10-04,Desk Mat,Office Supplies,26,650.00,West
+2026-10-04,Desk Organizer,Office Supplies,9,180.00,East
+2026-10-04,External SSD,Electronics,9,1260.00,North
+2026-10-04,Drawer Unit,Furniture,9,1350.00,South
+2026-10-04,Office Chair,Furniture,7,1750.00,West
+2026-10-04,Notebook Pack,Office Supplies,39,390.00,West
+2026-10-05,Desk Organizer,Office Supplies,28,560.00,South
+2026-10-05,Foot Rest,Furniture,7,315.00,South
+2026-10-05,Standing Desk,Furniture,4,2800.00,North
+2026-10-05,Laptop Stand,Electronics,12,960.00,East
+2026-10-05,Whiteboard,Office Supplies,9,675.00,North
+2026-10-05,Sticky Notes,Office Supplies,24,192.00,North
+2026-10-06,Standing Desk,Furniture,3,2100.00,West
+2026-10-06,Wireless Mouse,Electronics,11,495.00,North
+2026-10-06,Standing Desk,Furniture,2,1400.00,East
+2026-10-06,Surge Protector,Electronics,6,210.00,North
+2026-10-06,Desk Organizer,Office Supplies,28,560.00,North
+2026-10-06,Foot Rest,Furniture,3,135.00,North
+2026-10-07,Whiteboard,Office Supplies,11,825.00,North
+2026-10-07,Bookshelf,Furniture,7,1260.00,South
+2026-10-07,Wireless Mouse,Electronics,13,585.00,East
+2026-10-07,Desk Organizer,Office Supplies,33,660.00,East
+2026-10-07,Drawer Unit,Furniture,6,900.00,West
+2026-10-07,Pen Set,Office Supplies,28,336.00,South
+2026-10-08,Wireless Mouse,Electronics,14,630.00,South
+2026-10-08,Desk Lamp,Furniture,2,120.00,North
+2026-10-08,Office Chair,Furniture,4,1000.00,West
+2026-10-08,Wireless Mouse,Electronics,12,540.00,East
+2026-10-08,Mechanical Keyboard,Electronics,8,720.00,West
+2026-10-08,Conference Chair,Furniture,9,1575.00,East
+2026-10-09,Foot Rest,Furniture,4,180.00,East
+2026-10-09,27-inch Monitor,Electronics,6,1800.00,West
+2026-10-09,Notebook Pack,Office Supplies,14,140.00,East
+2026-10-09,Surge Protector,Electronics,10,350.00,East
+2026-10-09,Standing Desk,Furniture,1,700.00,East
+2026-10-09,Laptop Stand,Electronics,13,1040.00,East
+2026-10-10,Foot Rest,Furniture,6,270.00,West
+2026-10-10,USB-C Hub,Electronics,10,600.00,West
+2026-10-10,Mechanical Keyboard,Electronics,15,1350.00,West
+2026-10-10,Desk Mat,Office Supplies,9,225.00,North
+2026-10-10,Desk Organizer,Office Supplies,28,560.00,West
+2026-10-10,Desk Organizer,Office Supplies,37,740.00,East
+2026-10-11,Bookshelf,Furniture,1,180.00,South
+2026-10-11,Desk Organizer,Office Supplies,6,120.00,West
+2026-10-11,Laptop Dock,Electronics,14,2520.00,North
+2026-10-11,Pen Set,Office Supplies,11,132.00,North
+2026-10-11,Sticky Notes,Office Supplies,33,264.00,West
+2026-10-11,Office Chair,Furniture,6,1500.00,East
+2026-10-12,Office Chair,Furniture,3,750.00,South
+2026-10-12,Bookshelf,Furniture,10,1800.00,South
+2026-10-12,Ergonomic Keyboard,Electronics,18,1980.00,South
+2026-10-12,Desk Organizer,Office Supplies,37,740.00,North
+2026-10-12,Standing Desk,Furniture,2,1400.00,East
+2026-10-12,Filing Cabinet,Furniture,8,1600.00,East
+2026-10-13,Filing Cabinet,Furniture,6,1200.00,North
+2026-10-13,Ergonomic Keyboard,Electronics,15,1650.00,West
+2026-10-13,27-inch Monitor,Electronics,15,4500.00,South
+2026-10-13,Pen Set,Office Supplies,21,252.00,South
+2026-10-13,Mechanical Keyboard,Electronics,17,1530.00,West
+2026-10-13,Office Chair,Furniture,2,500.00,West
+2026-10-14,Filing Cabinet,Furniture,2,400.00,South
+2026-10-14,Laptop Sleeve,Electronics,6,240.00,West
+2026-10-14,Foot Rest,Furniture,9,405.00,South
+2026-10-14,Pen Set,Office Supplies,12,144.00,North
+2026-10-14,Webcam,Electronics,15,1200.00,West
+2026-10-14,Printer Paper,Office Supplies,24,240.00,South
+2026-10-15,Standing Desk,Furniture,10,7000.00,East
+2026-10-15,Mechanical Keyboard,Electronics,17,1530.00,East
+2026-10-15,Drawer Unit,Furniture,2,300.00,South
+2026-10-15,Drawer Unit,Furniture,9,1350.00,South
+2026-10-15,Standing Desk,Furniture,5,3500.00,East
+2026-10-15,Laptop Sleeve,Electronics,15,600.00,West
+2026-10-16,Bookshelf,Furniture,5,900.00,West
+2026-10-16,USB-C Hub,Electronics,10,600.00,South
+2026-10-16,27-inch Monitor,Electronics,13,3900.00,West
+2026-10-16,USB-C Hub,Electronics,6,360.00,North
+2026-10-16,Office Chair,Furniture,3,750.00,West
+2026-10-16,Office Chair,Furniture,9,2250.00,East
+2026-10-17,Ergonomic Keyboard,Electronics,15,1650.00,North
+2026-10-17,27-inch Monitor,Electronics,7,2100.00,South
+2026-10-17,Printer Paper,Office Supplies,25,250.00,West
+2026-10-17,Wireless Mouse,Electronics,6,270.00,East
+2026-10-17,External SSD,Electronics,3,420.00,West
+2026-10-17,Notebook Pack,Office Supplies,33,330.00,North
+2026-10-18,Laptop Dock,Electronics,16,2880.00,North
+2026-10-18,Notebook Pack,Office Supplies,18,180.00,West
+2026-10-18,Webcam,Electronics,15,1200.00,West
+2026-10-18,Printer Paper,Office Supplies,36,360.00,South
+2026-10-18,Wireless Mouse,Electronics,9,405.00,North
+2026-10-18,Bookshelf,Furniture,1,180.00,West
+2026-10-19,Desk Lamp,Furniture,5,300.00,East
+2026-10-19,External SSD,Electronics,6,840.00,South
+2026-10-19,Printer Paper,Office Supplies,25,250.00,West
+2026-10-19,Laptop Stand,Electronics,17,1360.00,North
+2026-10-19,USB-C Hub,Electronics,6,360.00,North
+2026-10-19,Surge Protector,Electronics,9,315.00,South
+2026-10-20,Office Chair,Furniture,7,1750.00,West
+2026-10-20,Filing Cabinet,Furniture,1,200.00,North
+2026-10-20,Office Chair,Furniture,6,1500.00,North
+2026-10-20,Foot Rest,Furniture,7,315.00,North
+2026-10-20,Printer Paper,Office Supplies,12,120.00,North
+2026-10-20,Laptop Stand,Electronics,12,960.00,East
+2026-10-21,Laptop Sleeve,Electronics,16,640.00,South
+2026-10-21,Office Chair,Furniture,7,1750.00,West
+2026-10-21,Monitor Arm,Electronics,15,1875.00,North
+2026-10-21,Bluetooth Headset,Electronics,4,380.00,North
+2026-10-21,Drawer Unit,Furniture,5,750.00,South
+2026-10-21,Monitor Arm,Electronics,12,1500.00,East
+2026-10-22,Office Chair,Furniture,9,2250.00,West
+2026-10-22,Bluetooth Headset,Electronics,18,1710.00,East
+2026-10-22,External SSD,Electronics,13,1820.00,South
+2026-10-22,Desk Mat,Office Supplies,14,350.00,East
+2026-10-22,Standing Desk,Furniture,3,2100.00,South
+2026-10-22,Desk Lamp,Furniture,3,180.00,East
+2026-10-23,External SSD,Electronics,4,560.00,East
+2026-10-23,External SSD,Electronics,17,2380.00,North
+2026-10-23,External SSD,Electronics,16,2240.00,South
+2026-10-23,Drawer Unit,Furniture,6,900.00,East
+2026-10-23,Desk Organizer,Office Supplies,9,180.00,North
+2026-10-23,Desk Organizer,Office Supplies,24,480.00,South
+2026-10-24,Foot Rest,Furniture,1,45.00,South
+2026-10-24,Bluetooth Headset,Electronics,4,380.00,South
+2026-10-24,Desk Organizer,Office Supplies,33,660.00,West
+2026-10-24,Wireless Mouse,Electronics,13,585.00,South
+2026-10-24,Office Chair,Furniture,2,500.00,North
+2026-10-24,Desk Organizer,Office Supplies,40,800.00,West
+2026-10-25,Desk Organizer,Office Supplies,17,340.00,South
+2026-10-25,Bookshelf,Furniture,8,1440.00,East
+2026-10-25,Wireless Mouse,Electronics,16,720.00,West
+2026-10-25,Laptop Sleeve,Electronics,12,480.00,West
+2026-10-25,Bluetooth Headset,Electronics,7,665.00,West
+2026-10-25,Monitor Arm,Electronics,16,2000.00,North
+2026-10-26,Bluetooth Headset,Electronics,18,1710.00,East
+2026-10-26,Webcam,Electronics,13,1040.00,South
+2026-10-26,Ergonomic Keyboard,Electronics,15,1650.00,South
+2026-10-26,Pen Set,Office Supplies,8,96.00,South
+2026-10-26,Office Chair,Furniture,6,1500.00,West
+2026-10-26,Surge Protector,Electronics,14,490.00,South
+2026-10-27,Notebook Pack,Office Supplies,14,140.00,South
+2026-10-27,Office Chair,Furniture,10,2500.00,East
+2026-10-27,Webcam,Electronics,11,880.00,North
+2026-10-27,Mechanical Keyboard,Electronics,4,360.00,South
+2026-10-27,Surge Protector,Electronics,14,490.00,South
+2026-10-27,Conference Chair,Furniture,3,525.00,West
+2026-10-28,Whiteboard,Office Supplies,32,2400.00,South
+2026-10-28,Laptop Stand,Electronics,13,1040.00,South
+2026-10-28,USB-C Hub,Electronics,8,480.00,South
+2026-10-28,External SSD,Electronics,17,2380.00,East
+2026-10-28,Monitor Arm,Electronics,6,750.00,East
+2026-10-28,Office Chair,Furniture,5,1250.00,West
+2026-10-29,Bluetooth Headset,Electronics,18,1710.00,West
+2026-10-29,Pen Set,Office Supplies,26,312.00,East
+2026-10-29,Bookshelf,Furniture,7,1260.00,East
+2026-10-29,USB-C Hub,Electronics,7,420.00,East
+2026-10-29,Desk Mat,Office Supplies,33,825.00,West
+2026-10-29,Filing Cabinet,Furniture,6,1200.00,East
+2026-10-30,Desk Organizer,Office Supplies,23,460.00,North
+2026-10-30,Monitor Arm,Electronics,9,1125.00,South
+2026-10-30,Laptop Sleeve,Electronics,17,680.00,East
+2026-10-30,Webcam,Electronics,16,1280.00,North
+2026-10-30,External SSD,Electronics,11,1540.00,North
+2026-10-30,Bluetooth Headset,Electronics,18,1710.00,North
+2026-10-31,USB-C Hub,Electronics,8,480.00,East
+2026-10-31,Drawer Unit,Furniture,5,750.00,West
+2026-10-31,Whiteboard,Office Supplies,35,2625.00,South
+2026-10-31,Surge Protector,Electronics,5,175.00,West
+2026-10-31,Printer Paper,Office Supplies,10,100.00,East
+2026-10-31,Notebook Pack,Office Supplies,33,330.00,East
+2026-11-01,Conference Chair,Furniture,7,1225.00,West
+2026-11-01,Monitor Arm,Electronics,16,2000.00,South
+2026-11-01,Laptop Stand,Electronics,15,1200.00,West
+2026-11-01,Ergonomic Keyboard,Electronics,18,1980.00,South
+2026-11-01,Monitor Arm,Electronics,14,1750.00,West
+2026-11-01,Webcam,Electronics,9,720.00,West
+2026-11-02,27-inch Monitor,Electronics,5,1500.00,South
+2026-11-02,Laptop Sleeve,Electronics,6,240.00,East
+2026-11-02,Wireless Mouse,Electronics,11,495.00,North
+2026-11-02,Sticky Notes,Office Supplies,13,104.00,North
+2026-11-02,Desk Organizer,Office Supplies,5,100.00,West
+2026-11-02,Laptop Stand,Electronics,10,800.00,East
+2026-11-03,Conference Chair,Furniture,3,525.00,North
+2026-11-03,Standing Desk,Furniture,5,3500.00,East
+2026-11-03,Printer Paper,Office Supplies,12,120.00,West
+2026-11-03,Monitor Arm,Electronics,15,1875.00,North
+2026-11-03,Office Chair,Furniture,2,500.00,North
+2026-11-03,Bookshelf,Furniture,9,1620.00,West
+2026-11-04,Whiteboard,Office Supplies,37,2775.00,East
+2026-11-04,Sticky Notes,Office Supplies,14,112.00,South
+2026-11-04,Filing Cabinet,Furniture,1,200.00,South
+2026-11-04,Monitor Arm,Electronics,15,1875.00,East
+2026-11-04,Pen Set,Office Supplies,10,120.00,South
+2026-11-04,Office Chair,Furniture,9,2250.00,West
+2026-11-05,Ergonomic Keyboard,Electronics,17,1870.00,West
+2026-11-05,Whiteboard,Office Supplies,29,2175.00,South
+2026-11-05,Notebook Pack,Office Supplies,6,60.00,South
+2026-11-05,Laptop Sleeve,Electronics,4,160.00,South
+2026-11-05,Monitor Arm,Electronics,5,625.00,South
+2026-11-05,Mechanical Keyboard,Electronics,3,270.00,South
+2026-11-06,Surge Protector,Electronics,12,420.00,East
+2026-11-06,Conference Chair,Furniture,8,1400.00,North
+2026-11-06,Whiteboard,Office Supplies,16,1200.00,East
+2026-11-06,Office Chair,Furniture,8,2000.00,West
+2026-11-06,Printer Paper,Office Supplies,17,170.00,West
+2026-11-06,Laptop Sleeve,Electronics,8,320.00,West
+2026-11-07,27-inch Monitor,Electronics,11,3300.00,North
+2026-11-07,Conference Chair,Furniture,9,1575.00,North
+2026-11-07,Notebook Pack,Office Supplies,7,70.00,East
+2026-11-07,Printer Paper,Office Supplies,27,270.00,West
+2026-11-07,Drawer Unit,Furniture,6,900.00,South
+2026-11-07,Standing Desk,Furniture,6,4200.00,North
+2026-11-08,Ergonomic Keyboard,Electronics,16,1760.00,North
+2026-11-08,27-inch Monitor,Electronics,7,2100.00,North
+2026-11-08,Sticky Notes,Office Supplies,36,288.00,South
+2026-11-08,Laptop Sleeve,Electronics,18,720.00,South
+2026-11-08,Laptop Sleeve,Electronics,4,160.00,North
+2026-11-08,Office Chair,Furniture,7,1750.00,East

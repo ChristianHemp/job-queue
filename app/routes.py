@@ -79,7 +79,7 @@ def get_job(job_id: int, db: Session = Depends(get_db)) -> JobDB:
     return job
 
 @router.get("/jobs", response_model=list[Job])
-def get_jobs(db: Session = Depends(get_db)) -> Sequence[JobDB]:
+def get_all_jobs(db: Session = Depends(get_db)) -> Sequence[JobDB]:
     all_jobs = db.scalars(select(JobDB)).all()
 
     return all_jobs

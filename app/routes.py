@@ -18,7 +18,7 @@ router = APIRouter()
 
 @router.get("/")
 def root():
-    return {"message": "LocalHost server is running..."}
+    return {"message": "uvicorn server is running..."}
 
 @router.post("/jobs", response_model=Job)
 def create_job(job: JobCreate, db: Session = Depends(get_db)) -> JobDB:

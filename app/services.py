@@ -158,7 +158,8 @@ def execute_analyze_sales_data(payload: SalesDataPayload) -> dict[str, Any]:
 
         if revenue_by_date:
             highest_revenue_date = max(
-                revenue_by_date, key=revenue_by_date.__getitem__
+                # cannot use r_b_d.get since .get can return None (does not trigger defaultdict factory)
+                revenue_by_date, key=lambda date: revenue_by_date[date]
             )
 
             result["revenue_by_date"] = dict(revenue_by_date)
@@ -170,7 +171,7 @@ def execute_analyze_sales_data(payload: SalesDataPayload) -> dict[str, Any]:
 
         if quantity_by_date:
             highest_volume_date = max(
-                quantity_by_date, key=quantity_by_date.__getitem__
+                quantity_by_date, key=lambda date: quantity_by_date[date]
             )
 
             result["quantity_by_date"] = dict(quantity_by_date)

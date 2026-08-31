@@ -183,6 +183,28 @@ def execute_analyze_sales_data(payload: SalesDataPayload) -> dict[str, Any]:
 
         return result
 
+def _parse_job_payload(job: JobDB) -> JobPayload:
+    config = JOB_REGISTRY.get(JobType(job.job_type))
+
+    if config is None:
+        raise ValueError("Unsupported Job Type")
+    
+    payload_model = config["payload_model"]
+    payload = payload_model.model_validate(job.payload)
+
+    return payload
+
+def restore_pending_jobs() -> None:
+    with SessionLocal() as db:
+        pending_jobs = db.scalars(
+            select(JobDB).where(
+                JobDB.status == JobStatus.PENDING.value
+                ).order_by(JobDB.job_id)
+            ).all()
+
+        for job in pending_jobs:
+            enqueue(job.job_id, job.priority)
+
 COLUMN_ALIASES = {
     "revenue": {
         "revenue",
@@ -241,25 +263,3 @@ JOB_REGISTRY = {
         "executor": execute_analyze_sales_data
     }
 }
-
-def _parse_job_payload(job: JobDB) -> JobPayload:
-    config = JOB_REGISTRY.get(JobType(job.job_type))
-
-    if config is None:
-        raise ValueError("Unsupported Job Type")
-    
-    payload_model = config["payload_model"]
-    payload = payload_model.model_validate(job.payload)
-
-    return payload
-
-def restore_pending_jobs() -> None:
-    with SessionLocal() as db:
-        pending_jobs = db.scalars(
-            select(JobDB).where(
-                JobDB.status == JobStatus.PENDING.value
-                ).order_by(JobDB.job_id)
-            ).all()
-
-        for job in pending_jobs:
-            enqueue(job.job_id, job.priority)

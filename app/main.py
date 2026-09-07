@@ -9,6 +9,7 @@ from app.models import Base
 from app.services import restore_pending_jobs
 
 
+# Create database tables if missing
 Base.metadata.create_all(bind=engine)
 
 @asynccontextmanager

@@ -7,12 +7,14 @@ from sqlalchemy.orm import Session
 from app.queue import enqueue
 from app.models import JobDB
 from app.database import SessionLocal
-from app.schemas import (JobType, 
-                         JobStatus, 
-                         JobPayload, 
-                         SumNumbersPayload, 
-                         CsvPayload, 
-                         SalesDataPayload)
+from app.schemas import (
+    JobType, 
+    JobStatus, 
+    JobPayload, 
+    SumNumbersPayload, 
+    CsvPayload, 
+    SalesDataPayload
+    )
 
 
 def _get_job_by_id(db: Session, job_id: int) -> JobDB | None:

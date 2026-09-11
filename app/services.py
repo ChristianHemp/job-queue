@@ -1,6 +1,9 @@
 import csv
+import re
+from datetime import datetime
 from typing import Any
 from collections import defaultdict
+from collections.abc import Sequence
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -78,8 +81,99 @@ def execute_process_csv(payload: CsvPayload) -> str:
 
     return path + str(column) # placeholder work implement csv processing later
 
+def _is_blank(value: str | None) -> bool:
+    return value is None or value.strip() == ""
+
+def _row_is_blank(row: dict[str, Any], fieldnames: Sequence[str]) -> bool:
+    return all(_is_blank(row.get(header)) for header in fieldnames)
+
+def _parse_currency(raw: str) -> float | None:
+    cleaned = raw.strip()
+
+    negative = False
+    # typical accounting negative number notation is "(123)" for -123
+    if cleaned.startswith("(") and cleaned.endswith(")"):
+        negative = True
+        cleaned = cleaned[1:-1]
+
+    cleaned = re.sub(r"[^0-9.\-]", "", cleaned)
+
+    if not cleaned:
+        return None
+
+    try:
+        value = float(cleaned)
+    except ValueError:
+        return None
+
+    return -abs(value) if negative else value
+
+def _parse_quantity(raw: str) -> int | None:
+    cleaned = raw.strip().replace(",", "")
+
+    try:
+        return int(cleaned)
+    except ValueError:
+        pass
+
+    try:
+        as_float = float(cleaned)
+    except ValueError:
+        return None
+
+    return int(as_float) if as_float.is_integer() else None
+
+_DATE_FORMATS = ["%Y-%m-%d", "%m/%d/%Y", "%m-%d-%Y", "%B %d, %Y", "%b %d, %Y"]
+
+def _parse_date(raw: str) -> str | None:
+    cleaned = raw.strip()
+
+    for date_format in _DATE_FORMATS:
+        try:
+            parsed = datetime.strptime(cleaned, date_format)
+        except ValueError:
+            continue
+
+        return parsed.strftime("%Y-%m-%d")
+
+    return None
+
+def _clean_label(row: dict[str, Any], column_map: dict[str, str], column_type: str) -> str | None:
+    if column_type not in column_map:
+        return None
+
+    raw_value = row.get(column_map[column_type])
+
+    if _is_blank(raw_value):
+        return None
+
+    assert raw_value is not None
+    return raw_value.strip()
+
+def _extract_field(
+    row: dict[str, Any],
+    column_map: dict[str, str],
+    column_type: str,
+    parser,
+    issues: "defaultdict[str, int]"
+    ):
+    if column_type not in column_map:
+        return None
+
+    raw_value = row.get(column_map[column_type])
+
+    if _is_blank(raw_value):
+        issues[f"missing_{column_type}"] += 1
+        return None
+
+    parsed = parser(raw_value)
+
+    if parsed is None:
+        issues[f"unparseable_{column_type}"] += 1
+
+    return parsed
+
 def execute_analyze_sales_data(payload: SalesDataPayload) -> dict[str, Any]:
-    # INCOMPLETE: Implement data cleaning and edge cases ie empty revenue, dirty date ie $15
     with open(payload.file_path, newline='') as file:
         reader = csv.DictReader(file)
 
@@ -93,11 +187,19 @@ def execute_analyze_sales_data(payload: SalesDataPayload) -> dict[str, Any]:
 
             for column_type, aliases in COLUMN_ALIASES.items():
                 if formatted_header in aliases:
+                    if column_type in column_map:
+                        raise ValueError(
+                            f"Ambiguous column mapping: both '{column_map[column_type]}' and "
+                            f"'{header}' map to column type '{column_type}'"
+                        )
+
                     column_map[column_type] = header
 
         row_count = 0
         total_revenue = 0.0
         total_quantity = 0
+
+        issues: defaultdict[str, int] = defaultdict(int)
 
         revenue_by_category: defaultdict[str, float] = defaultdict(float)
         revenue_by_region: defaultdict[str, float] = defaultdict(float)
@@ -108,40 +210,44 @@ def execute_analyze_sales_data(payload: SalesDataPayload) -> dict[str, Any]:
         for row in reader:
             row_count += 1
 
-            if "revenue" in column_map:
-                revenue = float(row[column_map["revenue"]])
+            if _row_is_blank(row, reader.fieldnames):
+                issues["blank_row"] += 1
+                continue
+
+            revenue = _extract_field(row, column_map, "revenue", _parse_currency, issues)
+            quantity = _extract_field(row, column_map, "quantity", _parse_quantity, issues)
+            date = _extract_field(row, column_map, "date", _parse_date, issues)
+
+            category = _clean_label(row, column_map, "category")
+            region = _clean_label(row, column_map, "region")
+            product = _clean_label(row, column_map, "product")
+
+            if revenue is not None:
                 total_revenue += revenue
 
-                if "category" in column_map:
-                    category = row[column_map["category"]]
-                
+                if category is not None:
                     revenue_by_category[category] += revenue
-                
-                if "region" in column_map:
-                    region = row[column_map["region"]]
-                
+
+                if region is not None:
                     revenue_by_region[region] += revenue
-                
-                if "date" in column_map:
-                    date = row[column_map["date"]]
-                
+
+                if date is not None:
                     revenue_by_date[date] += revenue
-                
-                if "product" in column_map:
-                    product = row[column_map["product"]]
-                
+
+                if product is not None:
                     revenue_by_product[product] += revenue
 
-            if "quantity" in column_map:
-                quantity = int(row[column_map["quantity"]])
+            if quantity is not None:
                 total_quantity += quantity
 
-                if "date" in column_map:
-                    date = row[column_map["date"]]
-
+                if date is not None:
                     quantity_by_date[date] += quantity
 
-        result: dict[str, Any] = {"row_count": row_count}
+        result: dict[str, Any] = {
+            "row_count": row_count,
+            "processed_row_count": row_count - issues.get("blank_row", 0),
+            "issues": dict(issues)
+        }
 
         if "revenue" in column_map:
             result["total_revenue"] = total_revenue

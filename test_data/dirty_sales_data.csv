@@ -1,0 +1,23 @@
+order_date,product,category,quantity,total_sales,region
+2026-08-01,Laptop,Electronics,5,999.99,West
+2026-08-02,Desk,Furniture,3,450.00,East
+2026-08-03,Chair,Furniture,4,,South
+2026-08-04,Monitor,Electronics,,199.99,North
+2026-08-05,Mouse,Electronics,10,$15.00,West
+2026-08-06,Sofa,Furniture,2,"$1,200.50",East
+2026-08-07,Table,Furniture,1,"1,200.50",South
+2026-08-08,Speaker,Electronics,3, 42.00 ,West
+2026-08-09,Keyboard,Electronics,-1,(15.00),North
+2026-08-10,Webcam,Electronics,2,not_a_number,East
+2026-08-11,Tablet,Electronics,N/A,89.99,West
+2026-08-12,Backpack,Office Supplies,ten,25.00,South
+2026-08-13,Notebook,Office Supplies,10.0,5.00,North
+2026-08-14,Pen Pack,Office Supplies,10.5,3.00,East
+2026-09-01,Folder,Office Supplies,20,50.00,South
+09/01/2026,Folder,Office Supplies,15,40.00,South
+2026/13/40,Charger,Electronics,4,19.99,North
+,,,,,
+2026-08-20,Lamp, electronics ,7,30.00,West
+2026-08-21,Lamp,ELECTRONICS,5,20.00,West
+2026-08-22,Chair Mat,Office Supplies,2,15.00,East,EXTRA_FIELD
+2026-08-23,Whiteboard,Office Supplies,1,22.00

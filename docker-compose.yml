@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: christian
+      POSTGRES_DB: job_queue
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U christian -d job_queue"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://christian:${POSTGRES_PASSWORD}@postgres/job_queue
+      REDIS_URL: ${REDIS_URL}
+    volumes:
+      - ./test_data:/app/test_data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  worker:
+    build: .
+    command: python -m app.worker
+    environment:
+      DATABASE_URL: postgresql+psycopg://christian:${POSTGRES_PASSWORD}@postgres/job_queue
+      REDIS_URL: ${REDIS_URL}
+      DB_POOL_SIZE: "2"
+      DB_MAX_OVERFLOW: "0"
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./test_data:/app/test_data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:

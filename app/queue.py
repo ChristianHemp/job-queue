@@ -4,6 +4,7 @@ import time
 import redis
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 _QUEUE_KEY = "jobqueue:jobs"

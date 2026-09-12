@@ -1,33 +1,43 @@
 import csv
+import os
 import re
 from datetime import datetime
 from typing import Any
 from collections import defaultdict
 from collections.abc import Sequence
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
 from app.queue import enqueue
 from app.models import JobDB
 from app.database import SessionLocal
 from app.schemas import (
-    JobType, 
-    JobStatus, 
-    JobPayload, 
-    SumNumbersPayload, 
-    CsvPayload, 
+    JobType,
+    JobStatus,
+    JobPayload,
+    SumNumbersPayload,
+    CsvPayload,
     SalesDataPayload
     )
 
 
-def _get_job_by_id(db: Session, job_id: int) -> JobDB | None:
-    return db.get(JobDB, job_id)
+def _log(message: str) -> None:
+    print(f"[pid={os.getpid()}] {datetime.now().isoformat(timespec='seconds')} {message}")
 
-def _mark_job_running(db: Session, job: JobDB) -> None:
-    job.status = JobStatus.RUNNING.value
-    job.result = None
-    job.error = None
+def _claim_job(db: Session, job_id: int) -> JobDB | None:
+    # Atomic conditional claim: only one caller can ever flip a given job
+    # from PENDING to RUNNING, closing the race a plain check-then-act would
+    # leave open between concurrent workers (or a re-enqueue via
+    # restore_pending_jobs racing an in-flight claim).
+    stmt = (
+        update(JobDB)
+        .where(JobDB.job_id == job_id, JobDB.status == JobStatus.PENDING.value)
+        .values(status=JobStatus.RUNNING.value, result=None, error=None)
+        .returning(JobDB)
+    )
+    job = db.execute(stmt).scalar_one_or_none()
     db.commit()
+    return job
 
 def _mark_job_failed(db: Session, job: JobDB) -> None:
     job.status = JobStatus.FAILED.value
@@ -38,18 +48,13 @@ def _mark_job_completed(db: Session, job: JobDB) -> None:
     db.commit()
 
 def process_job(db: Session, job_id: int) -> None:
-    job = _get_job_by_id(db, job_id)
-    
+    job = _claim_job(db, job_id)
+
     if job is None:
+        _log(f"job {job_id}: claim lost (already claimed or not pending) - skipping")
         return
-        
-    if job.status == JobStatus.RUNNING.value:
-        return
-        
-    if job.status == JobStatus.COMPLETED.value:
-        return
-    
-    _mark_job_running(db, job)
+
+    _log(f"job {job_id}: claimed, executing")
 
     try:
         job_type = JobType(job.job_type)
@@ -58,10 +63,12 @@ def process_job(db: Session, job_id: int) -> None:
 
         job.result = result
         _mark_job_completed(db, job)
+        _log(f"job {job_id}: completed")
     except Exception as e:
         job.error = str(e)
         job.result = None
         _mark_job_failed(db, job)
+        _log(f"job {job_id}: failed ({e})")
 
 def execute_job(job_type: JobType, payload: JobPayload) -> Any:
     config = JOB_REGISTRY.get(job_type)

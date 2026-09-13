@@ -1,16 +1,17 @@
 import csv
+import logging
 import os
 import re
-from datetime import datetime
-from typing import Any
+from datetime import datetime, timedelta
+from typing import Any, cast
 from collections import defaultdict
 from collections.abc import Sequence
-from sqlalchemy import select, update
+from sqlalchemy import func, select, update
+from sqlalchemy.engine import CursorResult
 from sqlalchemy.orm import Session
 
 from app.queue import enqueue
 from app.models import JobDB
-from app.database import SessionLocal
 from app.schemas import (
     JobType,
     JobStatus,
@@ -20,55 +21,91 @@ from app.schemas import (
     SalesDataPayload
     )
 
+logger = logging.getLogger(__name__)
 
-def _log(message: str) -> None:
-    print(f"[pid={os.getpid()}] {datetime.now().isoformat(timespec='seconds')} {message}")
+# A RUNNING job with no completion after this long is assumed to belong to a
+# dead worker and gets reclaimed. Tune based on the slowest real job type's
+# observed duration (see scripts/load_test.py).
+JOB_STALE_SECONDS = int(os.environ.get("JOB_STALE_SECONDS", 60))
+
+
+def _log(message: str, *, event: str | None = None, job_id: int | None = None) -> None:
+    logger.info(message, extra={"event": event, "job_id": job_id})
 
 def _claim_job(db: Session, job_id: int) -> JobDB | None:
     # Atomic conditional claim: only one caller can ever flip a given job
     # from PENDING to RUNNING, closing the race a plain check-then-act would
-    # leave open between concurrent workers (or a re-enqueue via
-    # restore_pending_jobs racing an in-flight claim).
+    # leave open between concurrent workers (or a reclaim racing an
+    # in-flight claim).
     stmt = (
         update(JobDB)
         .where(JobDB.job_id == job_id, JobDB.status == JobStatus.PENDING.value)
-        .values(status=JobStatus.RUNNING.value, result=None, error=None)
+        .values(status=JobStatus.RUNNING.value, result=None, error=None, started_at=func.now())
         .returning(JobDB)
     )
     job = db.execute(stmt).scalar_one_or_none()
     db.commit()
     return job
 
-def _mark_job_failed(db: Session, job: JobDB) -> None:
-    job.status = JobStatus.FAILED.value
+def _mark_job_completed(db: Session, job_id: int, result: Any) -> bool:
+    # Conditional on status still being RUNNING, mirroring _claim_job: if this
+    # job was reclaimed out from under a slow-but-still-alive worker (a false
+    # positive on staleness), the reclaim already moved it off RUNNING (to
+    # PENDING), so this write is dropped rather than resurrecting a job
+    # that's now legitimately waiting to be picked up again.
+    # Known limitation: this can't distinguish "my claim" from a later
+    # claim by someone else, since both just look like status='running' -
+    # there's no claim token/version, only a status check. If a false
+    # positive gets reclaimed AND re-claimed by another worker before this
+    # call runs, this write can still clobber that worker's result. Closing
+    # that fully would need a claim token, which is beyond this milestone's
+    # scope - the mitigation is tuning JOB_STALE_SECONDS so false positives
+    # are rare in the first place.
+    stmt = (
+        update(JobDB)
+        .where(JobDB.job_id == job_id, JobDB.status == JobStatus.RUNNING.value)
+        .values(status=JobStatus.COMPLETED.value, result=result, error=None, completed_at=func.now())
+    )
+    outcome = cast(CursorResult, db.execute(stmt))
     db.commit()
+    return outcome.rowcount > 0
 
-def _mark_job_completed(db: Session, job: JobDB) -> None:
-    job.status = JobStatus.COMPLETED.value
+def _mark_job_failed(db: Session, job_id: int, error: str) -> bool:
+    stmt = (
+        update(JobDB)
+        .where(JobDB.job_id == job_id, JobDB.status == JobStatus.RUNNING.value)
+        .values(status=JobStatus.FAILED.value, error=error, result=None, completed_at=func.now())
+    )
+    outcome = cast(CursorResult, db.execute(stmt))
     db.commit()
+    return outcome.rowcount > 0
 
 def process_job(db: Session, job_id: int) -> None:
     job = _claim_job(db, job_id)
 
     if job is None:
-        _log(f"job {job_id}: claim lost (already claimed or not pending) - skipping")
+        _log(f"job {job_id}: claim lost (already claimed or not pending) - skipping",
+             event="job_claim_lost", job_id=job_id)
         return
 
-    _log(f"job {job_id}: claimed, executing")
+    _log(f"job {job_id}: claimed, executing", event="job_claimed", job_id=job_id)
 
     try:
         job_type = JobType(job.job_type)
         payload = _parse_job_payload(job)
         result = execute_job(job_type, payload)
 
-        job.result = result
-        _mark_job_completed(db, job)
-        _log(f"job {job_id}: completed")
+        if _mark_job_completed(db, job_id, result):
+            _log(f"job {job_id}: completed", event="job_completed", job_id=job_id)
+        else:
+            _log(f"job {job_id}: completed but write lost (reclaimed concurrently)",
+                 event="job_completed_write_lost", job_id=job_id)
     except Exception as e:
-        job.error = str(e)
-        job.result = None
-        _mark_job_failed(db, job)
-        _log(f"job {job_id}: failed ({e})")
+        if _mark_job_failed(db, job_id, str(e)):
+            _log(f"job {job_id}: failed ({e})", event="job_failed", job_id=job_id)
+        else:
+            _log(f"job {job_id}: failed but write lost (reclaimed concurrently)",
+                 event="job_failed_write_lost", job_id=job_id)
 
 def execute_job(job_type: JobType, payload: JobPayload) -> Any:
     config = JOB_REGISTRY.get(job_type)
@@ -309,16 +346,42 @@ def _parse_job_payload(job: JobDB) -> JobPayload:
 
     return payload
 
-def restore_pending_jobs() -> None:
-    with SessionLocal() as db:
-        pending_jobs = db.scalars(
-            select(JobDB).where(
-                JobDB.status == JobStatus.PENDING.value
-                ).order_by(JobDB.job_id)
-            ).all()
+def reconcile_jobs(db: Session) -> None:
+    """Re-enqueue PENDING jobs (crash recovery for the queue) and reclaim
+    RUNNING jobs whose worker appears to have died (crash recovery for the
+    worker). Called once at API startup and periodically thereafter by a
+    background thread (see app/main.py)."""
+    _reenqueue_pending_jobs(db)
+    _reclaim_stale_running_jobs(db)
 
-        for job in pending_jobs:
-            enqueue(job.job_id, job.priority)
+def _reenqueue_pending_jobs(db: Session) -> None:
+    pending_jobs = db.scalars(
+        select(JobDB).where(
+            JobDB.status == JobStatus.PENDING.value
+            ).order_by(JobDB.job_id)
+        ).all()
+
+    for job in pending_jobs:
+        enqueue(job.job_id, job.priority)
+
+def _reclaim_stale_running_jobs(db: Session) -> None:
+    stmt = (
+        update(JobDB)
+        .where(
+            JobDB.status == JobStatus.RUNNING.value,
+            JobDB.started_at < func.now() - timedelta(seconds=JOB_STALE_SECONDS),
+        )
+        .values(status=JobStatus.PENDING.value, started_at=None,
+                reclaim_count=JobDB.reclaim_count + 1)
+        .returning(JobDB.job_id, JobDB.priority)
+    )
+    reclaimed = db.execute(stmt).all()
+    db.commit()
+
+    for job_id, priority in reclaimed:
+        _log(f"job {job_id}: reclaimed (stale RUNNING), re-enqueuing",
+             event="job_reclaimed", job_id=job_id)
+        enqueue(job_id, priority)
 
 COLUMN_ALIASES = {
     "revenue": {

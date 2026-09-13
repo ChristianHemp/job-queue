@@ -1,5 +1,6 @@
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Literal, Annotated, Any
+from datetime import datetime
 from enum import Enum, IntEnum
 
 
@@ -60,3 +61,7 @@ class Job(BaseModel):
     status: JobStatus
     result: Any | None = None
     error: str | None = None
+    created_at: datetime
+    started_at: datetime | None = None
+    completed_at: datetime | None = None
+    reclaim_count: int = 0

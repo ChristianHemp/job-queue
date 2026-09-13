@@ -59,6 +59,6 @@ def db_session():
 
 @pytest.fixture
 def client():
-    # `with` form so the lifespan (restore_pending_jobs) actually runs.
+    # `with` form so the lifespan (reconcile_jobs + reclaimer thread) actually runs.
     with TestClient(fastapi_app) as test_client:
         yield test_client

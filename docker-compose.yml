@@ -13,6 +13,15 @@ services:
       timeout: 3s
       retries: 15
 
+  migrate:
+    build: .
+    command: alembic upgrade head
+    environment:
+      DATABASE_URL: postgresql+psycopg://christian:${POSTGRES_PASSWORD}@postgres/job_queue
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   app:
     build: .
     ports:
@@ -20,11 +29,14 @@ services:
     environment:
       DATABASE_URL: postgresql+psycopg://christian:${POSTGRES_PASSWORD}@postgres/job_queue
       REDIS_URL: ${REDIS_URL}
+      PYTHONUNBUFFERED: "1"
+      JOB_STALE_SECONDS: ${JOB_STALE_SECONDS:-60}
+      RECLAIM_INTERVAL_SECONDS: ${RECLAIM_INTERVAL_SECONDS:-30}
     volumes:
       - ./test_data:/app/test_data:ro
     depends_on:
-      postgres:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
 
   worker:
     build: .
@@ -38,8 +50,8 @@ services:
     volumes:
       - ./test_data:/app/test_data:ro
     depends_on:
-      postgres:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
 
 volumes:
   pgdata:

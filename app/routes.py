@@ -1,13 +1,13 @@
 from fastapi import APIRouter, HTTPException, Depends
 from collections.abc import Sequence
 from sqlalchemy.orm import Session
-from sqlalchemy import select
+from sqlalchemy import select, text
 
 from app.database import get_db
 from app.models import JobDB
 from app.queue import enqueue
 from app.schemas import (
-    JobType, 
+    JobType,
     JobPriority,
     JobStatus,
     JobCreate,
@@ -19,6 +19,15 @@ router = APIRouter()
 @router.get("/")
 def root():
     return {"message": "uvicorn server is running..."}
+
+@router.get("/health")
+def health_check(db: Session = Depends(get_db)):
+    try:
+        db.execute(text("SELECT 1"))
+    except Exception:
+        raise HTTPException(status_code=503, detail="Database unreachable")
+
+    return {"status": "healthy"}
 
 @router.post("/jobs", response_model=Job)
 def create_job(job: JobCreate, db: Session = Depends(get_db)) -> JobDB:

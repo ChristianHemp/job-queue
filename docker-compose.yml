@@ -13,6 +13,19 @@ services:
       timeout: 3s
       retries: 15
 
+  redis:
+    image: redis:8-alpine
+    command: redis-server --appendonly yes
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
   migrate:
     build: .
     command: alembic upgrade head
@@ -28,13 +41,15 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: postgresql+psycopg://christian:${POSTGRES_PASSWORD}@postgres/job_queue
-      REDIS_URL: ${REDIS_URL}
+      REDIS_URL: redis://redis:6379/0
       PYTHONUNBUFFERED: "1"
       JOB_STALE_SECONDS: ${JOB_STALE_SECONDS:-60}
       RECLAIM_INTERVAL_SECONDS: ${RECLAIM_INTERVAL_SECONDS:-30}
     volumes:
       - ./test_data:/app/test_data:ro
     depends_on:
+      redis:
+        condition: service_healthy
       migrate:
         condition: service_completed_successfully
 
@@ -43,15 +58,18 @@ services:
     command: python -m app.worker
     environment:
       DATABASE_URL: postgresql+psycopg://christian:${POSTGRES_PASSWORD}@postgres/job_queue
-      REDIS_URL: ${REDIS_URL}
+      REDIS_URL: redis://redis:6379/0
       DB_POOL_SIZE: "2"
       DB_MAX_OVERFLOW: "0"
       PYTHONUNBUFFERED: "1"
     volumes:
       - ./test_data:/app/test_data:ro
     depends_on:
+      redis:
+        condition: service_healthy
       migrate:
         condition: service_completed_successfully
 
 volumes:
   pgdata:
+  redisdata:

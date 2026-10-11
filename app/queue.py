@@ -14,10 +14,10 @@ _COUNTER_KEY = "jobqueue:counter"
 # FIFO ordering within a tier.
 _PRIORITY_MULTIPLIER = 1_000_000
 
-# This managed/proxied Redis instance kills a blocking BZPOPMIN read after
-# ~5s regardless of the requested timeout (a socket TimeoutError, not a nil
-# reply), so a true server-side block isn't reliable here. Poll with a
-# non-blocking ZPOPMIN and sleep client-side between empty checks instead.
+# Poll with a non-blocking ZPOPMIN and sleep client-side between empty checks
+# rather than blocking server-side with BZPOPMIN: the managed Redis Cloud
+# instance this originally ran against killed blocking reads after ~5s
+# regardless of the requested timeout, and polling works against any Redis.
 _POLL_INTERVAL_SECONDS = 0.5
 
 redis_client = redis.from_url(os.environ["REDIS_URL"], decode_responses=True)

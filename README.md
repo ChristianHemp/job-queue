@@ -9,7 +9,7 @@ with support for multiple worker processes.
 docker compose up
 ```
 
-This starts Postgres, the API, and a worker together automatically. The API is available at
+This starts Postgres, Redis, the API, and a worker together automatically. The API is available at
 http://localhost:8000, with interactive docs (Swagger UI) at http://localhost:8000/docs.
 
 Scale workers with:
@@ -22,8 +22,16 @@ docker compose up --scale worker=3
 
 Useful for active development, e.g. with `--reload`.
 
-Prerequisites: a local Postgres server running, and a `.env` file with `REDIS_URL` set (see
-`.env.example`) — `DATABASE_URL` defaults to a local `job_queue` database if not set.
+Prerequisites: a local Postgres server and a Redis server running, and a `.env` file with
+`REDIS_URL` set (see `.env.example`) — `DATABASE_URL` defaults to a local `job_queue` database
+if not set.
+
+The simplest way to get Redis is to start just the Compose service, which listens on
+`localhost:6379`:
+
+```bash
+docker compose up -d redis
+```
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
@@ -100,7 +108,3 @@ pytest
 Requires a local `job_queue_test` Postgres database (`createdb job_queue_test`) — the suite
 uses `fakeredis` for the queue, so no live Redis connection is needed to run it. One additional
 test hits the real Redis instance and is excluded by default; run it with `pytest -m integration`.
-
-# Constraint
-
-Uses redis cloud which requires frequent use otherwise closed for inactivity. If program not run may need to create new (free) redis cloud instance and connect

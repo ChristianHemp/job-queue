@@ -1,4 +1,5 @@
-"""Manual, on-demand sanity check against the real Redis Cloud instance.
+"""Manual, on-demand sanity check against the real Redis instance
+(the one REDIS_URL in .env points at, e.g. `docker compose up redis`).
 
 Excluded from the default test run (see pytest.ini's `addopts`). Run with:
     pytest -m integration

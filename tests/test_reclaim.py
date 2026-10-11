@@ -1,5 +1,3 @@
-import threading
-
 from sqlalchemy import text
 
 from app.database import SessionLocal

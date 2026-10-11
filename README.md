@@ -107,4 +107,4 @@ pytest
 
 Requires a local `job_queue_test` Postgres database (`createdb job_queue_test`) — the suite
 uses `fakeredis` for the queue, so no live Redis connection is needed to run it. One additional
-test hits the real Redis instance and is excluded by default; run it with `pytest -m integration`.
+test hits the real Redis instance and is excluded by default; run it with `pytest -m integration`. Redis transitioned from redis cloud to local Redis due to maintinence issues.
